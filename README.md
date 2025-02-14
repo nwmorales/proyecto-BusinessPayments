@@ -276,5 +276,3 @@ merged_df.info()
 ## Grafico de valores faltantes del dataset usando un Left Join:
 ![newplot](https://github.com/user-attachments/assets/3ac799ec-5524-4a39-8aba-98a02853387f)
 
-![newplot](https://github.com/user-attachments/assets/3d73cb5f-710e-47f0-bc49-757363abe51a)
-
