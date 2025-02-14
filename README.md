@@ -274,6 +274,14 @@ merged_df.info()
 ##  Información del Dataset
 ![image](https://github.com/user-attachments/assets/d7f62b3a-c055-4356-b45c-8c5d37db82a5)
 
+## Grafico de valores faltantes del Credit_Request y gráfico de valores nulos en el Fees:
+
+![image](https://github.com/user-attachments/assets/057a2020-1fe6-48c6-b599-5c1b2788387f)
+
+![image](https://github.com/user-attachments/assets/f8c37035-6985-4337-826f-cb280e04e14d)
+
+
 ## Grafico de valores faltantes del dataset usando un Left Join:
 ![newplot](https://github.com/user-attachments/assets/3ac799ec-5524-4a39-8aba-98a02853387f)
+
 
