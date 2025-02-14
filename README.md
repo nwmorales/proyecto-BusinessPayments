@@ -268,9 +268,9 @@ merged_df['Month_fees'] = merged_df['Month_fees'].astype(str)  # Convert to stri
 merged_df['Month_fees'] = pd.to_datetime(merged_df['Month_fees'], format='%Y-%m')
 
 merged_df['Month_Num_fees'] = ((merged_df['Month_fees'] - merged_df['Month_fees'].min()).dt.days // 30)
-
-#  Display the merged dataset info
 merged_df.info()
+````
+#  Display the merged dataset info
 ![image](https://github.com/user-attachments/assets/d7f62b3a-c055-4356-b45c-8c5d37db82a5)
 
 ## Grafico de valores faltantes del dataset usando un Left Join:
