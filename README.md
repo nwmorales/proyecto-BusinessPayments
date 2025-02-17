@@ -14,7 +14,6 @@ Este proyecto tiene como propósito analizar y obtener conclusiones clave a part
 ![image](https://github.com/user-attachments/assets/0b4d9c0a-9a9e-4ae6-8112-0608257c2b38)
 
 
-
 ## Objetivos del Análisis
 Este estudio tiene como objetivo abordar preguntas clave sobre el uso y rendimiento de los servicios financieros de Business Payments.
 Los objetivos principales son:
@@ -247,17 +246,83 @@ grouped_users = {
 print(grouped_users)
 
 
+# Merge datasets using cash_request_id from fees and cash_id from cash_request
+merged_df = cr.merge(fs, left_on='cash_id', right_on='cash_request_id', how='left')
+
+# Drop redundant columns (ensure 'id_y' exists before dropping)
+if 'id_y' in merged_df.columns:
+    merged_df = merged_df.drop(columns=["id_y"])
+
+# Rename columns for clarity
+merged_df.rename(columns={"id_x": "fee_id"}, inplace=True)
+
+#  Correct Column Naming
+if 'created_at_y' in merged_df.columns:  # Prefer cash request date
+    merged_df['created_at_cash_request'] = merged_df['created_at_y']
+    merged_df = merged_df.drop(columns=["created_at_y"])
+    if 'created_at_x' in merged_df.columns:  # Use fee date if cash request date is missing
+        merged_df['created_at_fees'] = merged_df['created_at_x']
+        merged_df = merged_df.drop(columns=["created_at_x"])
+else:
+    raise KeyError("Column 'created_at' not found in merged dataset")
+
+#  Convert 'created_at_cash_request' to datetime
+merged_df['created_at_cash_request'] = pd.to_datetime(merged_df['created_at_cash_request'], errors='coerce')
+
+#  Create Month Column for Cash Request
+merged_df['Month_cash_request'] = merged_df['created_at_cash_request'].dt.to_period('M')
+merged_df['Month_cash_request'] = merged_df['Month_cash_request'].astype(str)  # Convert to string
+merged_df['Month_cash_request'] = pd.to_datetime(merged_df['Month_cash_request'], format='%Y-%m')
+
+merged_df['Month_Num_cash_request'] = ((merged_df['Month_cash_request'] - merged_df['Month_cash_request'].min()).dt.days // 30)
+
+#  Convert 'created_at_fees' to datetime
+merged_df['created_at_fees'] = pd.to_datetime(merged_df['created_at_fees'], errors='coerce')
+
+#  Create Month Column for Fees
+merged_df['Month_fees'] = merged_df['created_at_fees'].dt.to_period('M')
+merged_df['Month_fees'] = merged_df['Month_fees'].astype(str)  # Convert to string
+merged_df['Month_fees'] = pd.to_datetime(merged_df['Month_fees'], format='%Y-%m')
+
+merged_df['Month_Num_fees'] = ((merged_df['Month_fees'] - merged_df['Month_fees'].min()).dt.days // 30)
+
+#  Display the merged dataset info
+merged_df.info()
+
 ````
 ##  Información del Dataset
-![image](https://github.com/user-attachments/assets/d7f62b3a-c055-4356-b45c-8c5d37db82a5)
 
-## Grafico de valores faltantes del Credit_Request y gráfico de valores nulos en el Fees segun nuestra classificacion:
+![image](https://github.com/user-attachments/assets/b9c2119d-9b15-46c9-b83a-50c410c115a4)
+
+
+## Grafico de valores faltantes segun nuestra classificacion:
 
 ![image](https://github.com/user-attachments/assets/fdc6a922-7ab6-4519-a972-24474db8815e)
 
 
+## Grafico de valores faltantes del dataset completo usando Left Join:
 
-## Grafico de valores faltantes del dataset usando un Left Join:
 ![newplot](https://github.com/user-attachments/assets/3ac799ec-5524-4a39-8aba-98a02853387f)
 
 
+## Histogramas variables mas relevantes, separando por nuestro cohorte
+# LOW
+![image](https://github.com/user-attachments/assets/bf1b2dbf-1ac5-443a-806e-00d094186ab9)
+
+# MEDIUM
+![image](https://github.com/user-attachments/assets/c8dc09af-fabd-443a-b376-05afd778edd5)
+
+# HIGH
+![image](https://github.com/user-attachments/assets/7a9b73b1-39bd-4a60-a95a-412189436c77)
+
+## Graficos de violin
+![image](https://github.com/user-attachments/assets/db92727c-1667-4ed6-b6e5-b6c370b60ca6)
+![image](https://github.com/user-attachments/assets/b251841f-931c-4c48-a122-7803349442d0)
+![image](https://github.com/user-attachments/assets/6b6db2a4-ebe5-4dc3-bbf9-553add9ca110)
+
+## Diferenciación por dispersion
+![image](https://github.com/user-attachments/assets/f8dcb4ac-c256-4e9e-9842-2050cb93d5d8)
+
+
+## Evolución por segmentos
+![image](https://github.com/user-attachments/assets/6421f9ba-7d4c-4778-8a56-71d52d84d4cc)
