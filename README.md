@@ -343,21 +343,6 @@ merged_df.info()
 ![image](https://github.com/user-attachments/assets/6da4f96c-7f61-4847-af35-98e58d24c783)
 
 
-## HEAT MAPS POR COHORTE (Low, Medium, High) Combinados
-![image](https://github.com/user-attachments/assets/a236f1ba-72e7-40de-876a-3c60db3c7202)
-
-![image](https://github.com/user-attachments/assets/7b9997e7-7885-4c4a-8845-6ffc18b23194)
-
-![image](https://github.com/user-attachments/assets/07a51e34-c3a5-434c-ab6b-ca2a4ac5ab97)
-
-## HEAT MAPS POR COHORTE (Low, Medium, High) Activos
-![image](https://github.com/user-attachments/assets/9e39c3b9-902c-4ac9-abe0-64f262042323)
-
-![image](https://github.com/user-attachments/assets/9619eb34-7e98-4cc3-95a9-2b8998f98881)
-
-![image](https://github.com/user-attachments/assets/02a5015a-590b-4839-b773-413350f68bfe)
-
-
 ## Graficas de violin para comparacion segmentadas
 ![image](https://github.com/user-attachments/assets/d37b89ce-1242-4577-976d-989624c7bab0)
 
@@ -380,6 +365,20 @@ merged_df.info()
 ![image](https://github.com/user-attachments/assets/8693bcbf-c865-4951-b6c4-4fa801559093)
 
 
+## HEAT MAPS POR COHORTE (Low, Medium, High) Combinados
+![image](https://github.com/user-attachments/assets/a236f1ba-72e7-40de-876a-3c60db3c7202)
+
+![image](https://github.com/user-attachments/assets/7b9997e7-7885-4c4a-8845-6ffc18b23194)
+
+![image](https://github.com/user-attachments/assets/07a51e34-c3a5-434c-ab6b-ca2a4ac5ab97)
+
+## HEAT MAPS POR COHORTE (Low, Medium, High) Activos
+![image](https://github.com/user-attachments/assets/9e39c3b9-902c-4ac9-abe0-64f262042323)
+
+![image](https://github.com/user-attachments/assets/9619eb34-7e98-4cc3-95a9-2b8998f98881)
+
+![image](https://github.com/user-attachments/assets/02a5015a-590b-4839-b773-413350f68bfe)
+
 ## HEAT MAPS POR COHORTE (Low, Medium, High) Eliminados
 
 ![image](https://github.com/user-attachments/assets/a8cf598a-ebb7-45eb-b86e-417d84716fac)
@@ -387,6 +386,7 @@ merged_df.info()
 ![image](https://github.com/user-attachments/assets/b3b5311f-070d-479b-b24b-187d53bfdb73)
 
 ![image](https://github.com/user-attachments/assets/05918907-76d5-4664-8e87-49f87bf7adb7)
+
 
 ## Matriz de confusion de datos acumulados Datos Combinados
 
