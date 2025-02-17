@@ -306,17 +306,22 @@ merged_df.info()
 
 
 ## Histogramas variables mas relevantes, separando por nuestro cohorte
-# LOW
+### LOW
 ![image](https://github.com/user-attachments/assets/bf1b2dbf-1ac5-443a-806e-00d094186ab9)
 
-# MEDIUM
+### MEDIUM
 ![image](https://github.com/user-attachments/assets/c8dc09af-fabd-443a-b376-05afd778edd5)
 
-# HIGH
+### HIGH
 ![image](https://github.com/user-attachments/assets/7a9b73b1-39bd-4a60-a95a-412189436c77)
 
+## Boxplot por segmentos
+![image](https://github.com/user-attachments/assets/38d13944-003f-4cdd-8547-29dc4f4f6b03)
+![image](https://github.com/user-attachments/assets/4f09c023-1280-4cfa-b5d1-f6d7d66fc8b6)
+![image](https://github.com/user-attachments/assets/9c259056-4eeb-4e21-9e7b-fa34edf8e67a)
+
 ## Graficos de violin
-![image](https://github.com/user-attachments/assets/db92727c-1667-4ed6-b6e5-b6c370b60ca6)
+![image](https://github.com/user-attachments/assets/f0f6936a-7be8-4cae-a93d-b0a206419a7e)
 ![image](https://github.com/user-attachments/assets/b251841f-931c-4c48-a122-7803349442d0)
 ![image](https://github.com/user-attachments/assets/6b6db2a4-ebe5-4dc3-bbf9-553add9ca110)
 
@@ -326,3 +331,56 @@ merged_df.info()
 
 ## Evolución por segmentos
 ![image](https://github.com/user-attachments/assets/6421f9ba-7d4c-4778-8a56-71d52d84d4cc)
+
+## Número de Solicitudes por Mes separado por segmentos
+### LOW
+![image](https://github.com/user-attachments/assets/ee56a638-6286-462d-a0bf-83f4cecfb37b)
+
+### MEDIUM
+![image](https://github.com/user-attachments/assets/a0d94fdc-ef2a-4579-b4ad-400cf8053c29)
+
+### HIGH
+![image](https://github.com/user-attachments/assets/6da4f96c-7f61-4847-af35-98e58d24c783)
+
+
+## HEAT MAPS POR COHORTE (Low, Medium, High) Combinados
+![image](https://github.com/user-attachments/assets/a236f1ba-72e7-40de-876a-3c60db3c7202)
+
+![image](https://github.com/user-attachments/assets/7b9997e7-7885-4c4a-8845-6ffc18b23194)
+
+![image](https://github.com/user-attachments/assets/07a51e34-c3a5-434c-ab6b-ca2a4ac5ab97)
+
+## HEAT MAPS POR COHORTE (Low, Medium, High) Activos
+![image](https://github.com/user-attachments/assets/9e39c3b9-902c-4ac9-abe0-64f262042323)
+
+![image](https://github.com/user-attachments/assets/9619eb34-7e98-4cc3-95a9-2b8998f98881)
+
+![image](https://github.com/user-attachments/assets/02a5015a-590b-4839-b773-413350f68bfe)
+
+## HEAT MAPS POR COHORTE (Low, Medium, High) Eliminados
+![image](https://github.com/user-attachments/assets/a8cf598a-ebb7-45eb-b86e-417d84716fac)
+
+![image](https://github.com/user-attachments/assets/b3b5311f-070d-479b-b24b-187d53bfdb73)
+
+![image](https://github.com/user-attachments/assets/05918907-76d5-4664-8e87-49f87bf7adb7)
+
+## Matriz de confusion de datos acumulados Datos Combinados
+![image](https://github.com/user-attachments/assets/30e39ec6-343c-47b1-a7e0-ac2903abf251)
+
+![image](https://github.com/user-attachments/assets/d97ec4bb-11db-46a1-a989-115b62a24cd5)
+
+![image](https://github.com/user-attachments/assets/63b61ea4-8f97-499c-a8c4-cef5d5b3e017)
+
+## Matriz de confusion de datos acumulados Usuarios activos
+![image](https://github.com/user-attachments/assets/433669c4-bebd-4f9f-95b2-734edcb88671)
+
+![image](https://github.com/user-attachments/assets/727b3527-6a07-473c-831d-18828f0004d3)
+
+![image](https://github.com/user-attachments/assets/9f374aa7-62fe-4f89-8016-ccf8cf52353a)
+
+## Matriz de confusion de datos acumulados Usuarios eliminados
+![image](https://github.com/user-attachments/assets/85204f13-e837-40b8-8d9c-f2e28042a438)
+
+![image](https://github.com/user-attachments/assets/23311ebc-0223-47cb-a3f9-345598a8c73e)
+
+![image](https://github.com/user-attachments/assets/0f6dbf8a-6321-4058-8eb9-60f5f756fb71)
