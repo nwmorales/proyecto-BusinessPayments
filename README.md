@@ -415,3 +415,11 @@ merged_df.info()
 ![image](https://github.com/user-attachments/assets/0f6dbf8a-6321-4058-8eb9-60f5f756fb71)
 
   
+# Nuestros Modelos de regressión
+
+### Primeros modelos
+Solo Interpolacion
+
+![image](https://github.com/user-attachments/assets/29971059-c13f-4e03-8358-40264e49c792)
+![image](https://github.com/user-attachments/assets/a604ee01-8cd1-4173-9000-405c80112266)
+![image](https://github.com/user-attachments/assets/0212c167-2825-4544-a851-7cee5fabf73f)
