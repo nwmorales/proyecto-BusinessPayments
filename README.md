@@ -229,56 +229,32 @@ cr.loc[:, 'id_completo'] = cr['user_id'].combine_first(cr['deleted_account_id'])
 # Conversión de float a int
 cr['id_completo'] = cr['id_completo'].astype(int)
 
+# Definir los bins y las etiquetas para los segmentos de gasto
+bins = [cr['amount'].min(), 50, 150, cr['amount'].max()]
+labels = ['Low', 'Medium', 'High']
 
-# Fusionar los datasets usando cash_request_id from fees and cash_id from cash_request para vincularlos
-merged_df = cr.merge(fs, left_on='cash_id', right_on='cash_request_id', how='left')
+# Asignar cada usuario a un segmento de gasto
+cr['spend_segment'] = pd.cut(cr['amount'], bins=bins, labels=labels, include_lowest=True)
 
-# Drop redundant columns (ensure 'id_y' exists before dropping)
-if 'id_y' in merged_df.columns:
-    merged_df = merged_df.drop(columns=["id_y"])
+# Crear diccionario para almacenar los id_completo por segmento
+grouped_users = {
+    'Low': cr.loc[cr['spend_segment'] == 'Low', 'id_completo'].tolist(),
+    'Medium': cr.loc[cr['spend_segment'] == 'Medium', 'id_completo'].tolist(),
+    'High': cr.loc[cr['spend_segment'] == 'High', 'id_completo'].tolist()
+}
 
-# Rename columns for clarity
-merged_df.rename(columns={"id_x": "fee_id"}, inplace=True)
+# Mostrar los resultados
+print(grouped_users)
 
-#  Correct Column Naming
-if 'created_at_y' in merged_df.columns:  # Prefer cash request date
-    merged_df['created_at_cash_request'] = merged_df['created_at_y']
-    merged_df = merged_df.drop(columns=["created_at_y"])
-    if 'created_at_x' in merged_df.columns:  # Use fee date if cash request date is missing
-        merged_df['created_at_fees'] = merged_df['created_at_x']
-        merged_df = merged_df.drop(columns=["created_at_x"])
-else:
-    raise KeyError("Column 'created_at' not found in merged dataset")
 
-#  Convert 'created_at_cash_request' to datetime
-merged_df['created_at_cash_request'] = pd.to_datetime(merged_df['created_at_cash_request'], errors='coerce')
-
-#  Create Month Column for Cash Request
-merged_df['Month_cash_request'] = merged_df['created_at_cash_request'].dt.to_period('M')
-merged_df['Month_cash_request'] = merged_df['Month_cash_request'].astype(str)  # Convert to string
-merged_df['Month_cash_request'] = pd.to_datetime(merged_df['Month_cash_request'], format='%Y-%m')
-
-merged_df['Month_Num_cash_request'] = ((merged_df['Month_cash_request'] - merged_df['Month_cash_request'].min()).dt.days // 30)
-
-#  Convert 'created_at_fees' to datetime
-merged_df['created_at_fees'] = pd.to_datetime(merged_df['created_at_fees'], errors='coerce')
-
-#  Create Month Column for Fees
-merged_df['Month_fees'] = merged_df['created_at_fees'].dt.to_period('M')
-merged_df['Month_fees'] = merged_df['Month_fees'].astype(str)  # Convert to string
-merged_df['Month_fees'] = pd.to_datetime(merged_df['Month_fees'], format='%Y-%m')
-
-merged_df['Month_Num_fees'] = ((merged_df['Month_fees'] - merged_df['Month_fees'].min()).dt.days // 30)
-merged_df.info()
 ````
 ##  Información del Dataset
 ![image](https://github.com/user-attachments/assets/d7f62b3a-c055-4356-b45c-8c5d37db82a5)
 
-## Grafico de valores faltantes del Credit_Request y gráfico de valores nulos en el Fees:
+## Grafico de valores faltantes del Credit_Request y gráfico de valores nulos en el Fees segun nuestra classificacion:
 
-![image](https://github.com/user-attachments/assets/057a2020-1fe6-48c6-b599-5c1b2788387f)
+![image](https://github.com/user-attachments/assets/fdc6a922-7ab6-4519-a972-24474db8815e)
 
-![image](https://github.com/user-attachments/assets/f8c37035-6985-4337-826f-cb280e04e14d)
 
 
 ## Grafico de valores faltantes del dataset usando un Left Join:
