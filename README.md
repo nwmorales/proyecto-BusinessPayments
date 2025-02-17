@@ -332,6 +332,10 @@ merged_df.info()
 ## Evolución por segmentos
 ![image](https://github.com/user-attachments/assets/6421f9ba-7d4c-4778-8a56-71d52d84d4cc)
 
+
+## Matiz de correlacion de las variables
+![image](https://github.com/user-attachments/assets/16939249-bce3-4653-811a-04d65858c315)
+
 ## Número de Solicitudes por Mes separado por segmentos
 ### LOW
 ![image](https://github.com/user-attachments/assets/ee56a638-6286-462d-a0bf-83f4cecfb37b)
@@ -409,3 +413,5 @@ merged_df.info()
 ![image](https://github.com/user-attachments/assets/23311ebc-0223-47cb-a3f9-345598a8c73e)
 
 ![image](https://github.com/user-attachments/assets/0f6dbf8a-6321-4058-8eb9-60f5f756fb71)
+
+  
