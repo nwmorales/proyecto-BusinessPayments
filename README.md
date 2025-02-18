@@ -423,3 +423,246 @@ Solo Interpolacion
 ![image](https://github.com/user-attachments/assets/29971059-c13f-4e03-8358-40264e49c792)
 ![image](https://github.com/user-attachments/assets/a604ee01-8cd1-4173-9000-405c80112266)
 ![image](https://github.com/user-attachments/assets/0212c167-2825-4544-a851-7cee5fabf73f)
+
+
+# Modelos de clasificación
+![image](https://github.com/user-attachments/assets/78b6becf-9258-4032-8582-e49c1cae2b24)
+
+Preparamos los datos para los modelos de clasificacion
+
+```python
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+# 📌 Para is_deleted_user (Usuarios que eliminan su cuenta)
+X_deleted = merged_df[['approval_rate', 'user_lifetime', 'rejection_rate']]
+y_deleted = merged_df['is_deleted_user']
+
+# 📌 Para worth_retaining (Usuarios valiosos para retención)
+X_retaining = merged_df[['approval_rate', 'user_lifetime', 'total_purchases', 'spend_segment_encoded']]
+y_retaining = merged_df['worth_retaining']
+
+# Asegurar que spend_segment_encoded sea numérico
+X_retaining['spend_segment_encoded'] = pd.to_numeric(X_retaining['spend_segment_encoded'], errors='coerce')
+
+## 📌 Ejecución del PASO 2 (Train/Test Split)
+
+# Nueva división para `is_deleted_user`
+X_train_deleted, X_test_deleted, y_train_deleted, y_test_deleted = train_test_split(
+    X_deleted, y_deleted, test_size=0.2, random_state=42
+)
+
+# Nueva división para `worth_retaining`
+X_train_retaining, X_test_retaining, y_train_retaining, y_test_retaining = train_test_split(
+    X_retaining, y_retaining, test_size=0.2, random_state=42
+)
+
+# Verificar formas
+print("Nuevos tamaños de los conjuntos:")
+print("X_train_deleted:", X_train_deleted.shape, "X_test_deleted:", X_test_deleted.shape)
+print("X_train_retaining:", X_train_retaining.shape, "X_test_retaining:", X_test_retaining.shape)
+````
+Nuevos tamaños de los conjuntos:
+
+X_train_deleted: (25675, 3) X_test_deleted: (6419, 3)
+
+X_train_retaining: (25675, 4) X_test_retaining: (6419, 4)
+
+## Modelos usados: SVM / KNN / Árbol de Decisión
+### SVM (sin ajustar)
+```python
+from sklearn.preprocessing import StandardScaler
+
+# Inicializar el escalador
+scaler = StandardScaler()
+
+# Escalar los datos para is_deleted_user
+X_train_deleted_scaled = scaler.fit_transform(X_train_deleted)
+X_test_deleted_scaled = scaler.transform(X_test_deleted)
+
+# Escalar los datos para worth_retaining
+X_train_retaining_scaled = scaler.fit_transform(X_train_retaining)
+X_test_retaining_scaled = scaler.transform(X_test_retaining)
+
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# 1️⃣ Entrenar SVM para `is_deleted_user`
+svm_deleted = SVC(kernel='linear', C=1, random_state=42)
+svm_deleted.fit(X_train_deleted_scaled, y_train_deleted)
+
+# Predicción en test
+y_pred_deleted_svm = svm_deleted.predict(X_test_deleted_scaled)
+
+# Evaluación del modelo
+print("🔹 SVM - is_deleted_user")
+print("Accuracy:", accuracy_score(y_test_deleted, y_pred_deleted_svm))
+print("Matriz de Confusión:\n", confusion_matrix(y_test_deleted, y_pred_deleted_svm))
+print("Reporte de Clasificación:\n", classification_report(y_test_deleted, y_pred_deleted_svm))
+
+# 2️⃣ Entrenar SVM para `worth_retaining`
+svm_retaining = SVC(kernel='linear', C=1, random_state=42)
+svm_retaining.fit(X_train_retaining_scaled, y_train_retaining)
+
+# Predicción en test
+y_pred_retaining_svm = svm_retaining.predict(X_test_retaining_scaled)
+
+# Evaluación del modelo
+print("\n🔹 SVM - worth_retaining")
+print("Accuracy:", accuracy_score(y_test_retaining, y_pred_retaining_svm))
+print("Matriz de Confusión:\n", confusion_matrix(y_test_retaining, y_pred_retaining_svm))
+print("Reporte de Clasificación:\n", classification_report(y_test_retaining, y_pred_retaining_svm))
+````
+![image](https://github.com/user-attachments/assets/d2e5eeb9-e0d2-4b9c-8170-f3647150da5f)
+
+### SVM (ajustado)
+![image](https://github.com/user-attachments/assets/29b1e3ef-420f-4195-886a-80a7b96ac0b1)  ![image](https://github.com/user-attachments/assets/dacd701c-e797-41ba-92a0-250774cb97e4)
+
+### KNN (sin ajustar)
+```python
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# 1️⃣ Entrenar KNN para `is_deleted_user`
+knn_deleted = KNeighborsClassifier(n_neighbors=5)
+knn_deleted.fit(X_train_deleted_scaled, y_train_deleted)
+
+# Predicción en test
+y_pred_deleted_knn = knn_deleted.predict(X_test_deleted_scaled)
+
+# Evaluación del modelo
+print("🔹 KNN - is_deleted_user")
+print("Accuracy:", accuracy_score(y_test_deleted, y_pred_deleted_knn))
+print("Matriz de Confusión:\n", confusion_matrix(y_test_deleted, y_pred_deleted_knn))
+print("Reporte de Clasificación:\n", classification_report(y_test_deleted, y_pred_deleted_knn))
+
+# 2️⃣ Entrenar KNN para `worth_retaining`
+knn_retaining = KNeighborsClassifier(n_neighbors=5)
+knn_retaining.fit(X_train_retaining_scaled, y_train_retaining)
+
+# Predicción en test
+y_pred_retaining_knn = knn_retaining.predict(X_test_retaining_scaled)
+
+# Evaluación del modelo
+print("\n🔹 KNN - worth_retaining")
+print("Accuracy:", accuracy_score(y_test_retaining, y_pred_retaining_knn))
+print("Matriz de Confusión:\n", confusion_matrix(y_test_retaining, y_pred_retaining_knn))
+print("Reporte de Clasificación:\n", classification_report(y_test_retaining, y_pred_retaining_knn))
+````
+![image](https://github.com/user-attachments/assets/60ae815a-e3fe-4df9-813d-8175ceb232ef)
+
+### KNN (ajustado)
+![image](https://github.com/user-attachments/assets/431ca767-958f-4ac6-abf7-d306378d5643)
+
+### Árbol de Decisión (sin ajustar)
+```python
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# 1️⃣ Reentrenar Árbol de Decisión para `is_deleted_user`
+optimized_tree_deleted = DecisionTreeClassifier(max_depth=6, min_samples_split=10, min_samples_leaf=5, random_state=42)
+optimized_tree_deleted.fit(X_train_deleted, y_train_deleted)
+
+# Predicción
+y_pred_deleted_opt = optimized_tree_deleted.predict(X_test_deleted)
+
+# Evaluación del modelo optimizado
+print("🔹 Árbol de Decisión Optimizado (Nuevas Features) - is_deleted_user")
+print("Accuracy:", accuracy_score(y_test_deleted, y_pred_deleted_opt))
+print("Matriz de Confusión:\n", confusion_matrix(y_test_deleted, y_pred_deleted_opt))
+print("Reporte de Clasificación:\n", classification_report(y_test_deleted, y_pred_deleted_opt))
+
+# 2️⃣ Reentrenar Árbol de Decisión para `worth_retaining`
+optimized_tree_retaining = DecisionTreeClassifier(max_depth=6, min_samples_split=10, min_samples_leaf=5, random_state=42)
+optimized_tree_retaining.fit(X_train_retaining, y_train_retaining)
+
+# Predicción
+y_pred_retaining_opt = optimized_tree_retaining.predict(X_test_retaining)
+
+# Evaluación del modelo optimizado
+print("\n🔹 Árbol de Decisión Optimizado (Nuevas Features) - worth_retaining")
+print("Accuracy:", accuracy_score(y_test_retaining, y_pred_retaining_opt))
+print("Matriz de Confusión:\n", confusion_matrix(y_test_retaining, y_pred_retaining_opt))
+print("Reporte de Clasificación:\n", classification_report(y_test_retaining, y_pred_retaining_opt))
+````
+![image](https://github.com/user-attachments/assets/099b2d01-00a8-4a89-a2cf-ba094400427e)
+
+### Árbol de Decisión (ajustado)
+![image](https://github.com/user-attachments/assets/412e41a6-5e64-4eb2-a6ca-3c96c182ea2c)
+
+### Comparación
+![image](https://github.com/user-attachments/assets/49ce8177-247f-4b5d-bfb0-dd2833d9c78c)
+📌 Interpretación de la Comparación de Modelos
+Tabla de Métricas
+SVM tiene el mejor Recall (1) = 0.72, lo que significa que detecta mejor a los usuarios eliminados.
+KNN tiene la mejor Precisión (1) = 0.39, pero su Recall es muy bajo (0.21), lo que indica que no detecta bien a los usuarios eliminados.
+Árbol de Decisión tiene un buen Recall (0.79), pero su AUC es el más bajo.
+
+Curva ROC
+SVM (AUC = 0.80) tiene la mejor área bajo la curva, lo que indica que es el modelo con mejor capacidad predictiva.
+Árbol de Decisión (AUC = 0.60) es bajo, lo que sugiere que no separa bien las clases.
+KNN (AUC = 0.59) está casi en la línea de azar, lo que indica un rendimiento pobre en este problema.
+
+📌 ¿Qué modelo deberíamos elegir?
+📢 El modelo SVM es el mejor para is_deleted_user porque tiene: ✔️ Mayor AUC (0.80) → Mejor capacidad de clasificación.
+✔️ Buen Recall (0.72) → Detecta bien a los usuarios que eliminan su cuenta.
+
+📢 KNN y Árbol de Decisión no son recomendables porque tienen un AUC muy bajo y detectan mal la clase positiva.
+
+![image](https://github.com/user-attachments/assets/765ea32b-c184-4874-91ae-9955d6dcd786)
+
+📌 Observaciones:
+* Todos los modelos tienen una precisión y un recall muy altos → lo que indica que todos son buenos para predecir si un usuario es valioso para retención.
+* El Árbol de Decisión tiene la mejor combinación de Precision y Recall (0.98 - 0.99 - 0.99).
+* El SVM y KNN también tienen muy buen rendimiento, con valores casi idénticos.
+
+🔹 Curva ROC
+* 📈 El SVM tiene el mejor AUC (1.00), lo que indica una separación perfecta entre clases.
+* 📈 KNN también tiene un AUC muy alto (0.99), lo que significa que también es un excelente modelo.
+* 📉 Árbol de Decisión tiene un AUC de 0.50, lo que indica que su desempeño es aleatorio para este problema (lo que es extraño dado su accuracy alto 🤔).
+
+📢 🔹 La mejor opción es SVM porque: ✔️ AUC = 1.00 → Máxima capacidad de clasificación.
+* ✔️ Recall (1) = 0.99 → Detecta casi todos los usuarios valiosos.
+* ✔️ Accuracy alto (0.99+) → Clasificación muy precisa.
+
+* 🔹 KNN también es una opción válida, pero tiene un AUC ligeramente menor.
+* 🔹 El Árbol de Decisión no es confiable en este caso debido a su AUC de 0.50.
+
+![image](https://github.com/user-attachments/assets/93c9bb75-f711-41b5-a7d6-7d26b837e2a2)
+![image](https://github.com/user-attachments/assets/66dd0005-3a56-4ff2-b5b4-d39cfa225ef8)
+![image](https://github.com/user-attachments/assets/9e3d3e9e-5de7-4f8e-8683-54e20d134dcc)
+📌 Interpretación:
+* approval_rate y rejection_rate son los factores más influyentes.
+* A menor tasa de aprobación (approval_rate), mayor probabilidad de eliminar la cuenta.
+* A mayor tasa de rechazo (rejection_rate), más propenso a eliminar la cuenta.
+* user_lifetime tiene menor impacto, pero sigue influyendo.
+
+📌 Interpretación:
+* total_purchases es el factor más influyente. Más compras → Más probable que sea valioso.
+* user_lifetime también es clave: Usuarios con más tiempo tienen más valor.
+* spend_segment_encoded muestra que los clientes con mayor nivel de gasto tienen más probabilidades de ser valiosos.
+* approval_rate tiene menor impacto, pero sigue siendo relevante.
+
+### Predicciones
+```python
+# 🔹 1️⃣ Generar Predicciones para `is_deleted_user`
+y_pred_deleted_final = best_svm_deleted.predict(X_test_deleted_scaled)
+
+# 🔹 2️⃣ Generar Predicciones para `worth_retaining`
+y_pred_retaining_final = svm_retaining_rbf.predict(X_test_retaining_scaled)
+
+# Crear un DataFrame con los resultados
+df_predictions = pd.DataFrame({
+    "id_usuario": y_test_deleted.index,  # Ajusta según tu dataset
+    "is_deleted_user (Predicho)": y_pred_deleted_final,
+    "is_deleted_user (Real)": y_test_deleted.values,
+    "worth_retaining (Predicho)": y_pred_retaining_final,
+    "worth_retaining (Real)": y_test_retaining.values
+})
+
+# Mostrar primeras filas de las predicciones
+print("\n🔹 Predicciones Finales:")
+df_predictions.head(20)
+````
+
+![image](https://github.com/user-attachments/assets/74eea0ad-3e4e-4ef8-9b16-091fb2e03ff0)
