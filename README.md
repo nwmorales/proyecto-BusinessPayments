@@ -286,15 +286,85 @@ merged_df['Month_fees'] = pd.to_datetime(merged_df['Month_fees'], format='%Y-%m'
 
 merged_df['Month_Num_fees'] = ((merged_df['Month_fees'] - merged_df['Month_fees'].min()).dt.days // 30)
 
+## Ingenieria
+
+# Si 'deleted_account_id' tiene un valor, el usuario eliminó su cuenta (1), si es NaN, sigue activo (0)
+merged_df['is_deleted_user'] = merged_df['deleted_account_id'].notnull().astype(int)
+
+# 1️⃣ Calcular 'total_purchases' (Cantidad total de solicitudes realizadas por usuario)
+total_purchases_df = merged_df.groupby('id_completo').size().reset_index(name='total_purchases')
+merged_df = merged_df.merge(total_purchases_df, on='id_completo', how='left')
+
+# 3️⃣ Calcular 'rejection_rate' (Tasa de rechazos por usuario)
+# Contar solicitudes rechazadas
+rejected_requests_df = merged_df.groupby('id_completo')['status_x'].apply(lambda x: (x == 'rejected').sum()).reset_index()
+rejected_requests_df.rename(columns={'status_x': 'rejected_requests'}, inplace=True)
+
+# Calcular la tasa de rechazo
+rejection_rate_df = total_purchases_df.merge(rejected_requests_df, on='id_completo', how='left')
+rejection_rate_df['rejection_rate'] = rejection_rate_df['rejected_requests'] / rejection_rate_df['total_purchases']
+rejection_rate_df['rejection_rate'] = rejection_rate_df['rejection_rate'].fillna(0)  # Evitar valores NaN
+
+
+# Contar solicitudes canceladas por usuario
+canceled_requests_df = merged_df.groupby('id_completo')['status_x'].apply(lambda x: (x == 'canceled').sum()).reset_index()
+canceled_requests_df.rename(columns={'status_x': 'canceled_requests'}, inplace=True)
+
+# Calcular la tasa de cancelación
+canceled_rate_df = total_purchases_df.merge(canceled_requests_df, on='id_completo', how='left')
+
+canceled_rate_df['canceled_rate'] = canceled_rate_df['canceled_requests'] / canceled_rate_df['total_purchases']
+canceled_rate_df['cancelled_rate'] = canceled_rate_df['canceled_rate'].fillna(0)  # Evitar valores NaN
+
+# Agregar la nueva columna al dataset
+merged_df = merged_df.merge(canceled_rate_df[['id_completo', 'canceled_rate']], on='id_completo', how='left')
+
+# Agregar las nuevas métricas al dataset
+merged_df = merged_df.merge(rejection_rate_df[['id_completo', 'rejection_rate']], on='id_completo', how='left')
+
+
+# Contar solicitudes aprobadas (Definiendo aprobadas como 'money_back' y 'direct_debit_sent')
+approved_requests_df = merged_df.groupby('id_completo')['status_x'].apply(lambda x: ((x == 'money_back') | (x == 'direct_debit_sent')).sum()).reset_index()
+approved_requests_df.rename(columns={'status_x': 'approved_requests'}, inplace=True)
+
+# Calcular la tasa de aprobación
+approval_rate_df = total_purchases_df.merge(approved_requests_df, on='id_completo', how='left')
+approval_rate_df['approval_rate'] = approval_rate_df['approved_requests'] / approval_rate_df['total_purchases']
+approval_rate_df['approval_rate'] = approval_rate_df['approval_rate'].fillna(0)  # Evitar valores NaN
+
+# Agregar la nueva métrica al dataset
+merged_df = merged_df.merge(approval_rate_df[['id_completo', 'approval_rate']], on='id_completo', how='left')
+
+# Calcular user_lifetime solo con los datos disponibles
+merged_df["user_lifetime"] = (merged_df["updated_at_x"] - merged_df["created_at_cash_request"]).dt.days
+
+# Contar cuántos valores NaN quedaron en user_lifetime
+num_nan_user_lifetime = merged_df["user_lifetime"].isna().sum()
+num_nan_user_lifetime
+
+spend_mapping = {'Low': 0, 'Medium': 1, 'High': 2}
+merged_df['spend_segment_encoded'] = merged_df['spend_segment'].map(spend_mapping)
+
+# Definir umbrales basados en datos reales
+lifetime_threshold = merged_df["user_lifetime"].median()
+purchase_threshold = merged_df["total_purchases"].median()
+rejection_threshold = merged_df["rejection_rate"].quantile(0.75)
+
+# Aplicar la nueva lógica de worth_retaining con umbrales dinámicos
+merged_df["worth_retaining"] = (
+    (merged_df["spend_segment_encoded"] > 0) &  # Usuario no está en la categoría más baja de gasto
+    (merged_df["user_lifetime"] > lifetime_threshold) &  # Usuario ha estado al menos lo que marca la mediana
+    (merged_df["total_purchases"] > purchase_threshold) &  # Usuario ha hecho más que la mediana de solicitudes
+    (merged_df["rejection_rate"] < rejection_threshold)   # Tasa de rechazo menor al percentil 75
+).astype(int)
+
 #  Display the merged dataset info
 merged_df.info()
 
 ````
 ##  Información del Dataset
 
-![image](https://github.com/user-attachments/assets/092eb338-51c7-4099-90bf-9148f12ba780)
-
-
+![image](https://github.com/user-attachments/assets/e46951d3-fba7-422c-b387-9ae2fe32541d)
 
 ## Grafico de valores faltantes segun nuestra classificacion:
 
