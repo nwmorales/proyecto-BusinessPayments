@@ -519,7 +519,6 @@ Usamos primeramente datos acumulados segun el cohorte, para comporvar si funcion
 ![image](https://github.com/user-attachments/assets/29971059-c13f-4e03-8358-40264e49c792)
 ![image](https://github.com/user-attachments/assets/a604ee01-8cd1-4173-9000-405c80112266)
 ![image](https://github.com/user-attachments/assets/0212c167-2825-4544-a851-7cee5fabf73f)
-![image](https://github.com/user-attachments/assets/7a325a79-0b08-4f4c-9c45-5264719d1dab)
 
 ### Pero finalmente decidimos volver a intentar sacar modelos predictivos realizando la extrapolacion:
 ![image](https://github.com/user-attachments/assets/f4a2e596-06b6-4b7b-b223-26f91a708220)
