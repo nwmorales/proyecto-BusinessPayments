@@ -531,14 +531,26 @@ Pero no pudimos sacar ningun modelo realmente funcional, y realizamos un grafico
 
 
 # Modelos de clasificación
+📌 1. Definición de Variables Objetivo
+* is_deleted_user: Identificaba si un usuario eliminaba su cuenta.
+* worth_retaining: Indicaba si un usuario era valioso para la retención.
+  
+📌 2. Selección de Variables Predictoras
++ approval_rate: Tasa de aprobación de transacciones.
+* user_lifetime: Tiempo de vida del usuario en la plataforma.
+* rejection_rate: Tasa de rechazo de transacciones.
+* total_purchases: Cantidad total de compras realizadas.
+* spend_segment_encoded: Segmento de gasto del usuario (codificado numéricamente)
+
 ![image](https://github.com/user-attachments/assets/78b6becf-9258-4032-8582-e49c1cae2b24)
 
-* Spend
-*
-*
-*
-*
-*
+📌 1. Variables Más Relevantes para is_deleted_user (Usuarios que eliminan su cuenta) Variable Correlación con is_deleted_user Interpretación approval_rate -0.21 A mayor tasa de aprobación, menor probabilidad de eliminar la cuenta. rejection_rate 0.27 A mayor tasa de rechazo, mayor probabilidad de eliminar la cuenta. user_lifetime -0.09 Usuarios con más tiempo en la plataforma tienen menor probabilidad de irse.
+
+🔹 Conclusión: approval_rate y rejection_rate son los mejores predictores de abandono. user_lifetime influye pero no tan fuertemente.
+
+📌 2. Variables Más Relevantes para worth_retaining (Usuarios valiosos) Variable Correlación con worth_retaining Interpretación user_lifetime 0.52 Usuarios con más tiempo en la plataforma son más valiosos. total_purchases 0.38 Usuarios con más compras tienen mayor probabilidad de ser retenidos. approval_rate 0.24 A mayor tasa de aprobación, más probable que el usuario sea valioso. spend_segment_encoded 0.34 Usuarios con mayor nivel de gasto tienden a ser más valiosos.
+
+🔹 Conclusión: user_lifetime, total_purchases, y spend_segment_encoded son esenciales para predecir worth_retaining. approval_rate refuerza el perfil de usuario valioso.
 
 
 Preparamos los datos para los modelos de clasificacion
