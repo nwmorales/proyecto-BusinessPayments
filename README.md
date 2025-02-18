@@ -763,13 +763,13 @@ Curva ROC
 ![image](https://github.com/user-attachments/assets/93c9bb75-f711-41b5-a7d6-7d26b837e2a2)
 ![image](https://github.com/user-attachments/assets/66dd0005-3a56-4ff2-b5b4-d39cfa225ef8)
 ![image](https://github.com/user-attachments/assets/9e3d3e9e-5de7-4f8e-8683-54e20d134dcc)
-📌 Interpretación:
+📌 is_deleted_user:
 * approval_rate y rejection_rate son los factores más influyentes.
 * A menor tasa de aprobación (approval_rate), mayor probabilidad de eliminar la cuenta.
 * A mayor tasa de rechazo (rejection_rate), más propenso a eliminar la cuenta.
 * user_lifetime tiene menor impacto, pero sigue influyendo.
 
-📌 Interpretación:
+📌 worth_retaining:
 * total_purchases es el factor más influyente. Más compras → Más probable que sea valioso.
 * user_lifetime también es clave: Usuarios con más tiempo tienen más valor.
 * spend_segment_encoded muestra que los clientes con mayor nivel de gasto tienen más probabilidades de ser valiosos.
