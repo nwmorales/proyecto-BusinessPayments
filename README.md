@@ -292,7 +292,8 @@ merged_df.info()
 ````
 ##  Información del Dataset
 
-![image](https://github.com/user-attachments/assets/b9c2119d-9b15-46c9-b83a-50c410c115a4)
+![image](https://github.com/user-attachments/assets/092eb338-51c7-4099-90bf-9148f12ba780)
+
 
 
 ## Grafico de valores faltantes segun nuestra classificacion:
@@ -427,6 +428,14 @@ Solo Interpolacion
 
 # Modelos de clasificación
 ![image](https://github.com/user-attachments/assets/78b6becf-9258-4032-8582-e49c1cae2b24)
+
+* Spend
+*
+*
+*
+*
+*
+
 
 Preparamos los datos para los modelos de clasificacion
 
