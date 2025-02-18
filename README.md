@@ -489,11 +489,45 @@ merged_df.info()
 # Nuestros Modelos de regressión
 
 ### Primeros modelos
-Solo Interpolacion
+Usamos primeramente datos acumulados segun el cohorte, para comporvar si funcionaba el codigo
+![image](https://github.com/user-attachments/assets/12b6c697-611d-4f7e-a879-acde8bac2ecc)
+![image](https://github.com/user-attachments/assets/6ffb65a7-b350-4a49-9968-23c8b71e6d78)
+![image](https://github.com/user-attachments/assets/730547b4-6daf-43ca-81d1-98b0aba7e4c8)
+
+Una vez vimos que funcionaba, tratamos de realizar el modelo completo con los datos normales
+![image](https://github.com/user-attachments/assets/b5f5f812-3c19-450b-8fd9-e7abd6a80793)
+![image](https://github.com/user-attachments/assets/8fb66c43-8206-4917-b5ca-04b149fb5093)
+![image](https://github.com/user-attachments/assets/bd450bbe-221e-465d-b1ff-d1dba479f979)
+![image](https://github.com/user-attachments/assets/b27dbf6b-a9ad-4ebe-b992-91b1221674d4)
+![image](https://github.com/user-attachments/assets/0718fa04-e342-4afa-809b-48f2d06c9a23)
+![image](https://github.com/user-attachments/assets/4c91f3b3-b711-426b-a1c3-32b13a9c4d6a)
+![image](https://github.com/user-attachments/assets/90796515-e315-40af-8e85-905d6eed0e04)
+![image](https://github.com/user-attachments/assets/f928a636-723d-4366-a393-2ac0ab1f84c9)
+
+
+Pero al observar que no obteniamos ninguna prediccion valida, optamos por realizar una estandarizacion de los datos y aplicar modelos de Lasso y Ridge:
+![image](https://github.com/user-attachments/assets/50a5a85b-706e-4fa4-a74b-b7921d198582)
+![image](https://github.com/user-attachments/assets/5137e27a-15c2-4c4d-9ba5-fd45f76eef68)
+![image](https://github.com/user-attachments/assets/a0bd7ef0-0905-418d-bd3b-aa71877c6393)      ![image](https://github.com/user-attachments/assets/8f927938-54ee-426f-9422-29d191a927f9)
+![image](https://github.com/user-attachments/assets/df39e474-1cf3-4894-a693-77b9d66136cf)
+
+Posterior a esto, decidimos realizar únicamente el apartado de Interpolacion
 
 ![image](https://github.com/user-attachments/assets/29971059-c13f-4e03-8358-40264e49c792)
 ![image](https://github.com/user-attachments/assets/a604ee01-8cd1-4173-9000-405c80112266)
 ![image](https://github.com/user-attachments/assets/0212c167-2825-4544-a851-7cee5fabf73f)
+![image](https://github.com/user-attachments/assets/7a325a79-0b08-4f4c-9c45-5264719d1dab)
+
+Pero finalmente decidimos volver a intentar sacar modelos predictivos realizando la extrapolacion:
+![image](https://github.com/user-attachments/assets/f4a2e596-06b6-4b7b-b223-26f91a708220)
+![image](https://github.com/user-attachments/assets/35d43da6-3580-41f1-b27f-f5636441e6c8)
+![image](https://github.com/user-attachments/assets/f9b33142-79cd-4bb7-b657-8a7f189f8e41)
+![image](https://github.com/user-attachments/assets/71e0d7c9-3633-4720-aaba-ff512cf3cb93)
+![image](https://github.com/user-attachments/assets/38a80d16-fa2f-49d8-843e-6c92894ec132)
+
+Pero no pudimos sacar ningun modelo realmente funcional, y realizamos un grafico con la relevancia de los coeficientes en el modelo ridge
+![image](https://github.com/user-attachments/assets/398528dc-e3e8-48fd-bf69-f5a8e5bf3470)
+
 
 
 # Modelos de clasificación
