@@ -752,13 +752,13 @@ Curva ROC
 * El SVM y KNN también tienen muy buen rendimiento, con valores casi idénticos.
 
 🔹 Curva ROC
-* 📈 El SVM tiene el mejor AUC (1.00), lo que indica una separación perfecta entre clases.
-* 📈 KNN también tiene un AUC muy alto (0.99), lo que significa que también es un excelente modelo.
-* 📉 Árbol de Decisión tiene un AUC de 0.50, lo que indica que su desempeño es aleatorio para este problema (lo que es extraño dado su accuracy alto 🤔).
+*  El SVM tiene el mejor AUC (1.00), lo que indica una separación perfecta entre clases.
+*  KNN también tiene un AUC muy alto (0.99), lo que significa que también es un excelente modelo.
+*  Árbol de Decisión tiene un AUC de 0.50, lo que indica que su desempeño es aleatorio para este problema (lo que es extraño dado su accuracy alto 🤔).
 
 📢 🔹 La mejor opción es SVM porque: ✔️ AUC = 1.00 → Máxima capacidad de clasificación.
-* ✔️ Recall (1) = 0.99 → Detecta casi todos los usuarios valiosos.
-* ✔️ Accuracy alto (0.99+) → Clasificación muy precisa.
+*  Recall (1) = 0.99 → Detecta casi todos los usuarios valiosos.
+*  Accuracy alto (0.99+) → Clasificación muy precisa.
 
 * 🔹 KNN también es una opción válida, pero tiene un AUC ligeramente menor.
 * 🔹 El Árbol de Decisión no es confiable en este caso debido a su AUC de 0.50.
