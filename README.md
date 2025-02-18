@@ -440,6 +440,9 @@ merged_df.info()
 ![image](https://github.com/user-attachments/assets/8693bcbf-c865-4951-b6c4-4fa801559093)
 
 
+## Cantidad completa de adelanto de efectivo por cohorte y mes
+![image](https://github.com/user-attachments/assets/86eee44e-72cb-463d-9b68-78a6c92db552)
+
 ## HEAT MAPS POR COHORTE (Low, Medium, High) Combinados
 ![image](https://github.com/user-attachments/assets/a236f1ba-72e7-40de-876a-3c60db3c7202)
 
