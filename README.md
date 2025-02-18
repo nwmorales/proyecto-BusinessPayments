@@ -541,7 +541,7 @@ Usamos primeramente datos acumulados segun el cohorte, para comporvar si funcion
 + approval_rate: Tasa de aprobación de transacciones.
 * user_lifetime: Tiempo de vida del usuario en la plataforma.
 * rejection_rate: Tasa de rechazo de transacciones.
-* total_purchases: Cantidad total de compras realizadas.
+* total_purchases: Cantidad total de solicitudes realizadas.
 * spend_segment_encoded: Segmento de gasto del usuario (codificado numéricamente)
 
 ![image](https://github.com/user-attachments/assets/78b6becf-9258-4032-8582-e49c1cae2b24)
