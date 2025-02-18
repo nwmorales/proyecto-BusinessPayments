@@ -640,7 +640,9 @@ print("Reporte de Clasificación:\n", classification_report(y_test_retaining, y_
 ![image](https://github.com/user-attachments/assets/d2e5eeb9-e0d2-4b9c-8170-f3647150da5f)
 
 ### SVM (ajustado)
-![image](https://github.com/user-attachments/assets/29b1e3ef-420f-4195-886a-80a7b96ac0b1)  ![image](https://github.com/user-attachments/assets/dacd701c-e797-41ba-92a0-250774cb97e4)
+📌 Se ha aplicado el cambio del kernel a RBF en ambos objetivos, se ha cambiado el class_weight a 'balanced' pero solo en el objetivo 'is_deleted_user', se ha aplicado el "GridSearchSV' para el 'is_deleted_user' y por ultimo se probo distintos umbrales.
+![image](https://github.com/user-attachments/assets/29b1e3ef-420f-4195-886a-80a7b96ac0b1)  
+![image](https://github.com/user-attachments/assets/dacd701c-e797-41ba-92a0-250774cb97e4)
 
 ### KNN (sin ajustar)
 ```python
@@ -676,6 +678,7 @@ print("Reporte de Clasificación:\n", classification_report(y_test_retaining, y_
 ![image](https://github.com/user-attachments/assets/60ae815a-e3fe-4df9-813d-8175ceb232ef)
 
 ### KNN (ajustado)
+📌 Se ha probado con distintos valores para 'k' y aplicado el 'GridSearchCV' para ambos objetivos y por ultimo se ha aplicado 'weights='distance' para 'is_deleted_user'
 ![image](https://github.com/user-attachments/assets/431ca767-958f-4ac6-abf7-d306378d5643)
 
 ### Árbol de Decisión (sin ajustar)
@@ -712,6 +715,7 @@ print("Reporte de Clasificación:\n", classification_report(y_test_retaining, y_
 ![image](https://github.com/user-attachments/assets/099b2d01-00a8-4a89-a2cf-ba094400427e)
 
 ### Árbol de Decisión (ajustado)
+📌 Se ha aplicado 'GridSearchCV' para 'is_deleted_user'
 ![image](https://github.com/user-attachments/assets/412e41a6-5e64-4eb2-a6ca-3c96c182ea2c)
 
 ### Comparación
