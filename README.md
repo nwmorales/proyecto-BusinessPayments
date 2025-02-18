@@ -723,19 +723,20 @@ print("Reporte de Clasificación:\n", classification_report(y_test_retaining, y_
 
 ### Comparación
 ![image](https://github.com/user-attachments/assets/49ce8177-247f-4b5d-bfb0-dd2833d9c78c)
-📌 Interpretación de la Comparación de Modelos
+📌 Comparación de Modelos
+
 Tabla de Métricas
-SVM tiene el mejor Recall (1) = 0.72, lo que significa que detecta mejor a los usuarios eliminados.
-KNN tiene la mejor Precisión (1) = 0.39, pero su Recall es muy bajo (0.21), lo que indica que no detecta bien a los usuarios eliminados.
-Árbol de Decisión tiene un buen Recall (0.79), pero su AUC es el más bajo.
+* SVM tiene el mejor Recall (1) = 0.72, lo que significa que detecta mejor a los usuarios eliminados.
+* KNN tiene la mejor Precisión (1) = 0.39, pero su Recall es muy bajo (0.21), lo que indica que no detecta bien a los usuarios eliminados.
+* Árbol de Decisión tiene un buen Recall (0.79), pero su AUC es el más bajo.
 
 Curva ROC
-SVM (AUC = 0.80) tiene la mejor área bajo la curva, lo que indica que es el modelo con mejor capacidad predictiva.
-Árbol de Decisión (AUC = 0.60) es bajo, lo que sugiere que no separa bien las clases.
-KNN (AUC = 0.59) está casi en la línea de azar, lo que indica un rendimiento pobre en este problema.
+* SVM (AUC = 0.80) tiene la mejor área bajo la curva, lo que indica que es el modelo con mejor capacidad predictiva.
+* Árbol de Decisión (AUC = 0.60) es bajo, lo que sugiere que no separa bien las clases.
+* KNN (AUC = 0.59) está casi en la línea de azar, lo que indica un rendimiento pobre en este problema.
 
-📌 ¿Qué modelo deberíamos elegir?
 📢 El modelo SVM es el mejor para is_deleted_user porque tiene: ✔️ Mayor AUC (0.80) → Mejor capacidad de clasificación.
+
 ✔️ Buen Recall (0.72) → Detecta bien a los usuarios que eliminan su cuenta.
 
 📢 KNN y Árbol de Decisión no son recomendables porque tienen un AUC muy bajo y detectan mal la clase positiva.
