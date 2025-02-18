@@ -11,7 +11,7 @@ Este proyecto tiene como propósito analizar y obtener conclusiones clave a part
 
 ## Planificación
 
-![image](https://github.com/user-attachments/assets/0b4d9c0a-9a9e-4ae6-8112-0608257c2b38)
+![image](https://github.com/user-attachments/assets/247f999d-5a31-4c9f-ac16-eecb98a30af1)
 
 
 ## Objetivos del Análisis
